@@ -50,6 +50,10 @@ public class Customer {
         return serviceTime;
     }
 
+    public double distance(Customer customer){
+        return Math.sqrt(Math.pow(getxCoord() - customer.getxCoord(),2) + Math.pow(getyCoord() - customer.getyCoord(),2));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
