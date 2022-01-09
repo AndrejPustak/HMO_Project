@@ -8,9 +8,12 @@ public class Solution implements Comparable<Solution>{
 
     private List<Route> routes;
 
+    private int lastChangedId;
+
     public Solution() {
 
         routes = new ArrayList<>();
+        lastChangedId =-1;
 
     }
 
@@ -40,6 +43,13 @@ public class Solution implements Comparable<Solution>{
         return routes.stream().mapToDouble(r-> r.getTotalTime()).sum();
     }
 
+    public int getLastChangedId() {
+        return lastChangedId;
+    }
+
+    public void setLastChangedId(int lastChangedId) {
+        this.lastChangedId = lastChangedId;
+    }
 
     @Override
     public int compareTo(Solution solution) {

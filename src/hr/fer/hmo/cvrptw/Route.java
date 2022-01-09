@@ -50,6 +50,17 @@ public class Route {
         return true;
     };
 
+    public boolean insertCustomer(Customer customer, int index){
+        customers.add(index, customer);
+
+        if(!calculateRoute()) {
+            customers.remove(customer);
+            return false;
+        }
+
+        return true;
+    };
+
     public boolean calculateRoute(){
 
         if(customers.size() == 0) return true;
