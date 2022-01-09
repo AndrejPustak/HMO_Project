@@ -39,6 +39,14 @@ public class TabuSearch extends SearchAlgorithm {
 
         while(!stopingCondition()){
 
+            Solution temp = current.copy();
+
+            //random neighbour
+            int r = random.nextInt(temp.totalVehicles());
+            int c = random.nextInt(temp.getRoutes().get(r).getCustomers().size());
+
+            Customer removed = temp.getRoutes().get(r).removeCustomer(c);
+
             List<Solution> neighborhood = generateNeighborhood(current, 1000);
 
 
@@ -49,7 +57,7 @@ public class TabuSearch extends SearchAlgorithm {
 
     private List<Solution> generateNeighborhood(Solution solution, int size) {
 
-        return null;
+
 
     }
 
