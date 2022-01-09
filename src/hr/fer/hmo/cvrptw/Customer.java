@@ -66,4 +66,8 @@ public class Customer {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    public Customer copy(){
+        return new Customer(id, xCoord, yCoord, demand, readyTime, dueDate, serviceTime);
+    }
 }
