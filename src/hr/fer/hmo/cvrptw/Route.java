@@ -11,9 +11,9 @@ public class Route {
     private List<Customer> customers;
 
     private int totalDemand;
-    private float totalTime;
-    private float lastCustomerTime;
-    private float timeDifference;
+    private double totalTime;
+    private double lastCustomerTime;
+    private double timeDifference;
 
     public Route(int capacity, Customer base) {
 
@@ -88,7 +88,14 @@ public class Route {
         return true;
     }
 
-    public float timeDifference(){
+    public Customer removeCustomer(int index){
+        Customer c = customers.remove(index);
+        calculateRoute();
+
+        return c;
+    }
+
+    public double timeDifference(){
         return timeDifference;
     }
 
@@ -104,5 +111,9 @@ public class Route {
 
     public Customer getBase() {
         return base;
+    }
+
+    public double getTotalTime(){
+        return totalTime;
     }
 }

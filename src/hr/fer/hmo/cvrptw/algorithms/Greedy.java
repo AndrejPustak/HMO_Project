@@ -49,7 +49,7 @@ public class Greedy extends Algorithm {
 
     }
 
-    private double heuristic(float time, int demand){
+    private double heuristic(double time, int demand){
 
         return Math.pow(demand, 1) / Math.pow(time, 1.8);
 
