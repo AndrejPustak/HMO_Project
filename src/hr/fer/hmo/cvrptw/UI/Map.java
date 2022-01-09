@@ -43,7 +43,7 @@ public class Map extends JPanel {
 
             }
 
-            g2d.drawLine(c.getxCoord() * 10, c.getyCoord() * 10, 0, 0);
+            g2d.drawLine(c.getxCoord() * 10, c.getyCoord() * 10, route.getBase().getxCoord()*10, route.getBase().getyCoord()*10);
 
 
         }

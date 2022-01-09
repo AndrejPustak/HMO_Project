@@ -10,7 +10,7 @@ public class Greedy extends Algorithm {
 
         Solution solution = new Solution();
 
-        Route route = new Route(instance.getCapacity());
+        Route route = new Route(instance.getCapacity(), instance.getBase());
         while(instance.getCustomers().size() != 0){
 
             Customer best = findBest(route, instance);
@@ -20,7 +20,7 @@ public class Greedy extends Algorithm {
                 instance.getCustomers().remove(best);
             } else {
                 solution.addRoute(route);
-                route = new Route(instance.getCapacity());
+                route = new Route(instance.getCapacity(), instance.getBase());
             }
 
         }
@@ -51,7 +51,7 @@ public class Greedy extends Algorithm {
 
     private double heuristic(float time, int demand){
 
-        return Math.pow(demand, 1) / Math.pow(time, 1);
+        return Math.pow(demand, 1) / Math.pow(time, 1.8);
 
     }
 }

@@ -7,12 +7,15 @@ public class Instance {
     private int vehicleNumber;
     private int capacity;
 
+    private Customer base;
+
     private List<Customer> customers;
 
-    public Instance(int vehicleNumber, int capacity, List<Customer> customers) {
+    public Instance(int vehicleNumber, int capacity,Customer base, List<Customer> customers) {
         this.vehicleNumber = vehicleNumber;
         this.capacity = capacity;
         this.customers = customers;
+        this.base = base;
     }
 
     public int getVehicleNumber() {
@@ -25,5 +28,9 @@ public class Instance {
 
     public List<Customer> getCustomers() {
         return customers;
+    }
+
+    public Customer getBase() {
+        return base;
     }
 }

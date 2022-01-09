@@ -27,11 +27,12 @@ public class Utils {
         int vehicleNumber = Integer.parseInt(data[0]);
         int capacity = Integer.parseInt(data[1]);
 
-        for(int i = 7; i < lines.size(); i++){
+        Customer base = customerFromLine(lines.get(7));
+        for(int i = 8; i < lines.size(); i++){
             customers.add(customerFromLine(lines.get(i)));
         }
 
-        return new Instance(vehicleNumber, capacity, customers);
+        return new Instance(vehicleNumber, capacity, base, customers);
 
     }
 

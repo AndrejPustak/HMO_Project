@@ -15,21 +15,20 @@ public class Route {
     private float lastCustomerTime;
     private float timeDifference;
 
-    public Route(int capacity) {
+    public Route(int capacity, Customer base) {
 
         this.capacity = capacity;
 
-        base = new Customer(-1, 0 , 0,0,0,0,0);
+        this.base = base;
         customers = new ArrayList<>();
 
     }
 
-    public Route(int capacity, List<Customer> customers) {
+    public Route(int capacity,Customer base, List<Customer> customers) {
 
         this.capacity = capacity;
+        this.base = base;
         this.customers = customers;
-
-        base = new Customer(-1, 0 , 0,0,0,0,0);
 
         calculateRoute();
 
@@ -81,6 +80,8 @@ public class Route {
 
         ct += current.distance(base);
 
+        if(ct > base.getDueDate()) return false;
+
         totalDemand = demand;
         totalTime = ct;
 
@@ -93,7 +94,7 @@ public class Route {
 
     public Route copy(){
 
-        return new Route(capacity, customers.stream().map(Customer::copy).collect(Collectors.toList()));
+        return new Route(capacity,base.copy(), customers.stream().map(Customer::copy).collect(Collectors.toList()));
 
     }
 
