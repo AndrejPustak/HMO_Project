@@ -63,4 +63,8 @@ public class Solution implements Comparable<Solution>{
         }
 
     }
+
+    public int totalCustomers(){
+        return routes.stream().mapToInt(r->r.getCustomers().size()).sum();
+    }
 }

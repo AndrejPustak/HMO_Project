@@ -11,15 +11,15 @@ public class CVRPTW {
 
     public static void main(String[] args) {
 
-        Instance i1 = Utils.readInstance("instances/i1.txt");
+        Instance i1 = Utils.readInstance("instances/i2.txt");
 
         Algorithm greedy = new Greedy();
         SearchAlgorithm taboo = new TabuSearch(i1);
 
-        int neigbourhoodSize = 1000;
+        int neigbourhoodSize = 100;
 
         Solution inital = greedy.getInitialSolution(i1);
-        Solution tabooSolution = taboo.execute(inital, neigbourhoodSize);
+        Solution tabooSolution = taboo.execute(inital.copy(), neigbourhoodSize);
 
         SwingUtilities.invokeLater(()->{
             JFrame frame = new Display(tabooSolution);
@@ -28,12 +28,14 @@ public class CVRPTW {
 
 
         System.out.println("Greedy:");
-        System.out.println("    Vehicles: "+tabooSolution.totalVehicles());
-        System.out.println("    Time: "+tabooSolution.totalTime());
+        System.out.println("    Vehicles: "+inital.totalVehicles());
+        System.out.println("    Time: "+inital.totalTime());
+        System.out.println("    Customers: "+inital.totalCustomers());
 
         System.out.println("Taboo:");
         System.out.println("    Vehicles: "+tabooSolution.totalVehicles());
         System.out.println("    Time: "+tabooSolution.totalTime());
+        System.out.println("    Customers: "+tabooSolution.totalCustomers());
 
     }
 }

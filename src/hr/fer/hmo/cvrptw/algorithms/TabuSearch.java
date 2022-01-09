@@ -12,7 +12,7 @@ public class TabuSearch extends SearchAlgorithm {
 
     int tabooLife;
     public TabuSearch(Instance instance){
-        tabooLife = instance.getCustomers().size()/10;
+        tabooLife = instance.getCustomers().size()/5;
     }
 
     private class Move{
@@ -39,7 +39,7 @@ public class TabuSearch extends SearchAlgorithm {
         }
     }
 
-    private int iterations;
+    private int iteration;
 
     @Override
     public Solution execute(Solution solution) {
@@ -81,6 +81,10 @@ public class TabuSearch extends SearchAlgorithm {
                     move.life--;
                 }
             }
+
+            if(iteration++ %100 ==0){
+                System.out.println("Tabu search, iteration = " + iteration);
+            }
         }
 
         return incumbent;
@@ -102,17 +106,20 @@ public class TabuSearch extends SearchAlgorithm {
             }while (tabuList.contains(new Move(temp.getRoutes().get(r).getCustomers().get(c).getId())));
 
             Customer removed = temp.getRoutes().get(r).removeCustomer(c);
+            if(temp.getRoutes().get(r).getCustomers().size() == 0) temp.getRoutes().remove(r);
 
             for(int i = 0; i<temp.totalVehicles(); i++){
                 if(i == r) continue;
-                for(int j = 0; j<temp.getRoutes().get(r).getCustomers().size()+1;j++){
+                for(int j = 0; j<temp.getRoutes().get(i).getCustomers().size()+1;j++){
                     Solution possible = temp.copy();
-                    if(possible.getRoutes().get(r).insertCustomer(removed, j)){
+                    if(possible.getRoutes().get(i).insertCustomer(removed, j)){
+
                         solutions.add(possible);
                         possible.setLastChangedId(removed.getId());
                     }
                 }
             }
+
 
         }
 
@@ -121,7 +128,7 @@ public class TabuSearch extends SearchAlgorithm {
 
     private boolean stopingCondition() {
 
-        if(iterations >= 10000) return true;
+        if(iteration >= 2000) return true;
 
         return false;
 
