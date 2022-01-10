@@ -67,4 +67,34 @@ public class Solution implements Comparable<Solution>{
     public int totalCustomers(){
         return routes.stream().mapToInt(r->r.getCustomers().size()).sum();
     }
+
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+
+        int totalDistance = 0;
+
+        sb.append(routes.size()+"\r\n");
+
+        for(int i=0; i<routes.size(); i++){
+            sb.append(i + 1).append(": ");
+            sb.append("0(0)->");
+            Route r = routes.get(i);
+            Route r1 = r.copy();
+            r1.getCustomers().clear();
+            for(int j=0; j<r.getCustomers().size(); j++){
+                Customer c = r.getCustomers().get(j);
+                r1.addCustomer(c);
+                sb.append(c.getId()).append("(").append((int)(r1.getTotalTime() - c.getServiceTime())).append(")");
+                if(j!=r.getCustomers().size()){
+                    sb.append("->0(0)");
+                }
+            }
+            sb.append("\r\n");
+        }
+
+        sb.append(totalDistance);
+
+        return sb.toString();
+    }
 }

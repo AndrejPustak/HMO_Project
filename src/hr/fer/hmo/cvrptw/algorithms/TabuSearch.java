@@ -128,7 +128,7 @@ public class TabuSearch extends SearchAlgorithm {
 
     private boolean stopingCondition() {
 
-        if(iteration >= 2000) return true;
+        if(iteration >= 200) return true;
 
         return false;
 

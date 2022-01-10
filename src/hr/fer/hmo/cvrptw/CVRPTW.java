@@ -31,11 +31,13 @@ public class CVRPTW {
         System.out.println("    Vehicles: "+inital.totalVehicles());
         System.out.println("    Time: "+inital.totalTime());
         System.out.println("    Customers: "+inital.totalCustomers());
+        System.out.println(inital);
 
         System.out.println("Taboo:");
         System.out.println("    Vehicles: "+tabooSolution.totalVehicles());
         System.out.println("    Time: "+tabooSolution.totalTime());
         System.out.println("    Customers: "+tabooSolution.totalCustomers());
+        System.out.println(taboo);
 
     }
 }
