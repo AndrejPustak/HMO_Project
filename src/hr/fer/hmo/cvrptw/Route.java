@@ -15,6 +15,8 @@ public class Route {
     private double lastCustomerTime;
     private double timeDifference;
 
+    private double totalDistance;
+
     public Route(int capacity, Customer base) {
 
         this.capacity = capacity;
@@ -65,6 +67,10 @@ public class Route {
 
         if(customers.size() == 0) return true;
 
+        totalDistance = 0;
+        totalDemand = 0;
+        totalTime = 0;
+
         //current time
         int ct = 0;
         int demand = 0;
@@ -74,7 +80,8 @@ public class Route {
         int i;
         for(i = 0; i < customers.size(); i++){
             Customer c = customers.get(i);
-            ct += current.distance(c);
+            ct += Math.ceil(current.distance(c));
+            totalDistance += current.distance(c);
 
             if(ct > c.getDueDate()) return false;
 
@@ -89,7 +96,8 @@ public class Route {
         timeDifference = ct - customers.get(i-1).getServiceTime() - lastCustomerTime;
         lastCustomerTime = ct;
 
-        ct += current.distance(base);
+        ct += Math.ceil(current.distance(base));
+        totalDistance += current.distance(base);
 
         if(ct > base.getDueDate()) return false;
 
@@ -110,6 +118,10 @@ public class Route {
         return timeDifference;
     }
 
+    public double getLastCustomerTime() {
+        return lastCustomerTime;
+    }
+
     public Route copy(){
 
         return new Route(capacity,base.copy(), customers.stream().map(Customer::copy).collect(Collectors.toList()));
@@ -126,5 +138,9 @@ public class Route {
 
     public double getTotalTime(){
         return totalTime;
+    }
+
+    public double getTotalDistance(){
+        return totalDistance;
     }
 }

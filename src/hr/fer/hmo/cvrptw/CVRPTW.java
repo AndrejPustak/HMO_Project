@@ -11,7 +11,7 @@ public class CVRPTW {
 
     public static void main(String[] args) {
 
-        Instance i1 = Utils.readInstance("instances/i2.txt");
+        Instance i1 = Utils.readInstance("instances/i6.txt");
 
         Algorithm greedy = new Greedy();
         SearchAlgorithm taboo = new TabuSearch(i1);
@@ -37,7 +37,7 @@ public class CVRPTW {
         System.out.println("    Vehicles: "+tabooSolution.totalVehicles());
         System.out.println("    Time: "+tabooSolution.totalTime());
         System.out.println("    Customers: "+tabooSolution.totalCustomers());
-        System.out.println(taboo);
+        System.out.println(tabooSolution);
 
     }
 }

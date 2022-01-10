@@ -43,6 +43,10 @@ public class Solution implements Comparable<Solution>{
         return routes.stream().mapToDouble(r-> r.getTotalTime()).sum();
     }
 
+    public double totalDistance(){
+        return routes.stream().mapToDouble(r-> r.getTotalDistance()).sum();
+    }
+
     public int getLastChangedId() {
         return lastChangedId;
     }
@@ -57,8 +61,8 @@ public class Solution implements Comparable<Solution>{
         if(totalVehicles() < solution.totalVehicles()) return 1;
         else if(totalVehicles() > solution.totalVehicles()) return -1;
         else{
-            if(totalTime() < solution.totalTime()) return 1;
-            else if(totalTime() > solution.totalTime()) return -1;
+            if(totalTime() < solution.totalDistance()) return 1;
+            else if(totalTime() > solution.totalDistance()) return -1;
             else return 0;
         }
 
@@ -85,18 +89,18 @@ public class Solution implements Comparable<Solution>{
             for(int j=0; j<r.getCustomers().size(); j++){
                 Customer c = r.getCustomers().get(j);
                 r1.addCustomer(c);
-                sb.append(c.getId()).append("(").append((int)(r1.getTotalTime() - c.getServiceTime())).append(")");
+                sb.append(c.getId()).append("(").append((int)(r1.getLastCustomerTime() - c.getServiceTime())).append(")");
                 if(j!=r.getCustomers().size()-1){
                     sb.append("->");
                 }
                 else {
-                    sb.append("->0(0)");
+                    sb.append("->0(").append((int)r1.getTotalTime()).append(")");
                 }
             }
             sb.append("\r\n");
         }
 
-        sb.append(totalDistance);
+        sb.append(totalDistance());
 
         return sb.toString();
     }
