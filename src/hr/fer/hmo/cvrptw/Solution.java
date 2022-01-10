@@ -86,7 +86,10 @@ public class Solution implements Comparable<Solution>{
                 Customer c = r.getCustomers().get(j);
                 r1.addCustomer(c);
                 sb.append(c.getId()).append("(").append((int)(r1.getTotalTime() - c.getServiceTime())).append(")");
-                if(j!=r.getCustomers().size()){
+                if(j!=r.getCustomers().size()-1){
+                    sb.append("->");
+                }
+                else {
                     sb.append("->0(0)");
                 }
             }
