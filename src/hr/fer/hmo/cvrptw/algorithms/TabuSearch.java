@@ -10,6 +10,13 @@ import java.util.function.Predicate;
 
 public class TabuSearch extends SearchAlgorithm {
 
+    int maxIter = 500;
+
+    long startTime;
+    long endTime;
+
+    int timeLimit;
+
     int tabooLife;
     public TabuSearch(Instance instance){
         tabooLife = instance.getCustomers().size()/5;
@@ -43,11 +50,18 @@ public class TabuSearch extends SearchAlgorithm {
 
     @Override
     public Solution execute(Solution solution) {
-        return execute(solution, 1000);
+        return execute(solution, 1000, System.currentTimeMillis());
     }
 
     @Override
-    public Solution execute(Solution inital, int neighbourhoodSize) {
+    public Solution execute(Solution solution, int neighborhoodSize) {
+        return execute(solution, neighborhoodSize, System.currentTimeMillis());
+    }
+
+    @Override
+    public Solution execute(Solution inital, int neighbourhoodSize, long startTime) {
+
+        this.startTime = System.currentTimeMillis() - startTime;
 
         Set<Move> tabuList = new HashSet<>();
 
@@ -57,6 +71,7 @@ public class TabuSearch extends SearchAlgorithm {
         while(!stopingCondition()){
 
             List<Solution> neighborhood = generateNeighborhood(current, neighbourhoodSize, tabuList);
+            if(neighborhood.size() == 0) continue;
             Optional<Solution> optionalBest = neighborhood.stream().max(Solution::compareTo);
 
             Solution best;
@@ -128,9 +143,23 @@ public class TabuSearch extends SearchAlgorithm {
 
     private boolean stopingCondition() {
 
-        if(iteration >= 200) return true;
+        endTime = System.currentTimeMillis();
+        if(timeLimit > 0){
+            if((endTime-startTime) / 1000 > timeLimit) return true;
+        }
+
+        if(maxIter > 0)
+            if(iteration >= maxIter) return true;
 
         return false;
 
+    }
+
+    public void setTimeLimit(int timeLimit) {
+        this.timeLimit = timeLimit;
+    }
+
+    public void setMaxIter(int maxIter) {
+        this.maxIter = maxIter;
     }
 }

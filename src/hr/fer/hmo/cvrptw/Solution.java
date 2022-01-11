@@ -61,8 +61,8 @@ public class Solution implements Comparable<Solution>{
         if(totalVehicles() < solution.totalVehicles()) return 1;
         else if(totalVehicles() > solution.totalVehicles()) return -1;
         else{
-            if(totalTime() < solution.totalDistance()) return 1;
-            else if(totalTime() > solution.totalDistance()) return -1;
+            if(totalDistance() < solution.totalDistance()) return 1;
+            else if(totalDistance() > solution.totalDistance()) return -1;
             else return 0;
         }
 

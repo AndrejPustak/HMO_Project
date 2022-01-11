@@ -52,4 +52,14 @@ public class Utils {
 
     }
 
+    public static void saveSolution(String fileName, Solution solution){
+        Path path = Paths.get(fileName);
+
+        try {
+            Files.writeString(path, solution.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
